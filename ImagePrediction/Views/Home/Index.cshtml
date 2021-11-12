@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model ImagePrediction.Models.ResultViewModel
+
+<div class="text-center">
+    @*<h1 class="display-4">Welcome</h1>*@
+    @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+    @*<div class="center">*@
+    <img class="center logo" src="~/images/logocafe.jpg" width="9.5%" padding-top="10px" />
+    @*</div>*@
+    <div class="desc-app">Coffe Diseases Recognition</div>
+    <form id="form" asp-controller="Home" asp-action="Index" method="post">
+        <div class="form-group row" style="margin-top:3%; margin-bottom:3%;">
+            <div class="col-sm-11">
+                <input id="image"
+                       name="image"
+                       @*asp-for="@example"*@
+                       type="text"
+                       class="form-control"
+                       placeholder="https://imageurl.com">
+            </div>
+            <div class="col-sm-1 botao">
+                <button type="submit" id="botao" class="btn btn-primary">Enviar</button>
+            </div>
+        </div>
+    </form>
+    @if (!string.IsNullOrEmpty(@Model.Label))
+    {
+        <hr />
+        <div class="result-detected">
+            <div class="result-title">
+                Doença Identificada: @Model.Label
+            </div>
+            <img src="@Model.Url"
+                 title="@Model.Label"
+                 alt="@Model.Label" />
+            @if (Model.Label == "Ferrugem")
+            {
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Ferrugem"><u>Saiba como realizar o controle</u></a>
+            }
+            @if (Model.Label == "Mancha Aureolada")
+            {
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ManchaAureolada"><u>Saiba como realizar o controle</u></a>
+            }
+            @if (Model.Label == "Cercosporiose")
+            {
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Cercosporiose"><u>Saiba como realizar o controle</u></a>
+            }
+        </div>
+    }
+</div>
